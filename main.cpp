@@ -122,6 +122,7 @@ static float near = 1.f;
 static float far = 200.f; 
 
 
+
 int main() {
 
    
@@ -149,6 +150,15 @@ struct VtxPosClr {
   glm::vec3 clr; // vertex color coordinates (r, g, b)
 };
 
+
+/******************************************************************************/
+/*!
+@fn     void CalculateVertexNormals()
+@brief
+        Calculate the normal of each vertex using the weighted average of
+	all normals.
+*/
+/******************************************************************************/
 void CalculateVertexNormals() {
 
 
@@ -164,8 +174,6 @@ void CalculateVertexNormals() {
                 //total_vec
                 if (allIndices[j] == i)
                 {
-                    //angle = glm::angle(q -p, r - p)
-                    //total_vec += angle * cross(q - r, r - p)
                     float angle;
                     glm::vec3 normal;
                     glm::vec3 orientation_QP;
