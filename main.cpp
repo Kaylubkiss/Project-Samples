@@ -122,11 +122,15 @@ static float near = 1.f;
 static float far = 200.f; 
 
 
-
+/******************************************************************************/
+/*!
+@fn     main()
+@brief
+	Initialize window handle, OpenGL, and run the main program loop.
+*/
+/******************************************************************************/
 int main() {
 
-   
-    //
   Init(); // very first update
   ImGui_ImplGlfwGL3_Init(s_window_handle, true);
 
@@ -143,13 +147,6 @@ int main() {
   ImGui_ImplGlfwGL3_Shutdown();
   Cleanup();
 }
-
-//most likely don't need to use this...
-struct VtxPosClr {
-  glm::vec3 pos; // vertex position coordinates (x, y, z)
-  glm::vec3 clr; // vertex color coordinates (r, g, b)
-};
-
 
 /******************************************************************************/
 /*!
@@ -211,6 +208,7 @@ void CalculateVertexNormals() {
                     angle = glm::degrees(acos((abs(glm::dot(edge_1, edge_2)) / 
                     (glm::length(edge_1) * glm::length(edge_2)))));
                     normal = glm::cross(orientation_QP, orientation_RP);
+			
                     //The angle needs to be between the edges that *SHARE* the vertex.
                     total_vec += (angle * normal);
                 }
@@ -219,35 +217,35 @@ void CalculateVertexNormals() {
             allVertexNormals.push_back(allVertices[i]);
             allVertexNormals.push_back(allVertices[i] + glm::normalize(total_vec) * .06f); //point + vector equals another point
 
-            //coloring by vertex normals////
+            //coloring by vertex normals
             vtx_nrm_colors.push_back(allVertices[i] + glm::normalize(total_vec));
 
         } //calculate the normals
-
     }
-
 }
 
+/******************************************************************************/
+/*!
+@fn     void DrawObject()
+@brief
+       Generate the buffers for the objects of the scene.
+*/
+/******************************************************************************/
 void DrawObject() {
 
 	// Create pointer for all indices  
-	//@todo: IMPLEMENT ME
 
-	// set up buffer object with indices
-	//@todo: IMPLEMENT ME
+  // set up buffer object with indices
   glGenBuffers(1, &s_ebo_hdl);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, s_ebo_hdl);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, allIndices.size() * sizeof(int), &allIndices[0], GL_STATIC_DRAW); //, GL_STATIC_DRAW);
 
 
 	// create client-side vertex data for 1 triangle
-	//@todo: IMPLEMENT ME
   for (int i = 0; i < allVertices.size(); ++i) //don't want these to be uniform
   {
       vtx_colors.push_back(colorForAllVertices);
   }
-
-
 
   //Vertex Normals for light calculations
   glGenBuffers(1, &s_nvbo_hdl);
@@ -292,16 +290,15 @@ void DrawObject() {
   glVertexAttribPointer(4, 3, GL_FLOAT, false, 0, (void*)0);
   glEnableVertexAttribArray(4);
 
-  //Vertex Normals == s_nvbo_hdl --> indices to the actual vertex normals
+  //Vertex Normals == s_nvbo_hdl
   glBindBuffer(GL_ARRAY_BUFFER, s_nvbo_hdl);
 
 	// now, unbind triangle's VBO and VAO 
-	//@todo: IMPLEMENT ME
-  
   glBindVertexArray(0);
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
+
 
 void DrawNormals()
 {     
@@ -339,7 +336,7 @@ void DrawNormals()
 
      // create vertex array object
 	
-    // now, unbind triangle's VBO and VAO
+  	 // now, unbind triangle's VBO and VAO
      glBindVertexArray(0);
      glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
