@@ -68,18 +68,18 @@ static std::vector<glm::vec3> allVertexNormals;
 static glm::vec3 colorForAllVertices = glm::vec3(0.f, .25f, 0.f); 
 static std::vector<glm::vec3> vtx_colors;//<--- added by student
 static std::vector<glm::vec3> vtx_nrm_colors; //<--- added by student
-static glm::vec3 colorForAllNormals = glm::vec3(1.f, 1.f, 1.f); //<---- added by student.
+static glm::vec3 colorForAllNormals = glm::vec3(1.f, 1.f, 1.f);
 
-static glm::vec3 light_direction = { 1 / sqrt(3), 1 / sqrt(3), 20 }; // <--- student added
+static glm::vec3 light_direction = { 1 / sqrt(3), 1 / sqrt(3), 20 };
 
 static GLuint s_vao_hdl; // vertex array objects for FACET VERTICES 
-static GLuint s_ebo_hdl; //<---- element buffer object for indices.
+static GLuint s_ebo_hdl; //element buffer object for indices.
 
 //Added by student
-static GLuint s_vbo_hdl; // <--- vbo for vertices --> ADDED BY STUDENTS.
-static GLuint s_colorbuffer_hdl; // <--- color buffer --> added by student
-static GLuint s_nvbo_hdl; // <--- Added by student
-static GLuint s_vtxncolorbuffer_hdl;
+static GLuint s_vbo_hdl; // vbo for vertices
+static GLuint s_colorbuffer_hdl; // color buffer
+static GLuint s_nvbo_hdl; 
+static GLuint s_vtxncolorbuffer_hdl; // vertex normal color buffer 
 
 
 static GLuint s_nvao_hdl; //vertex array objects for NORMALS
@@ -107,9 +107,9 @@ static GLfloat s_angular_displacement = 0.f; // current angular displacement in 
 static glm::vec3 s_orientation_axis = glm::normalize(glm::vec3(0.f, 1.f, 0.f)); // orientation axis
 static glm::mat4 s_proj_mtx; // perspective xform - computed once for the whole scene
 static glm::mat4 s_view_mtx; // view xform - again computed once for the whole scene
-static glm::mat4 s_model_mtx; // model xform <--------added by student
+static glm::mat4 s_model_mtx; // model xform 
 static glm::mat4 s_mvp_xform = glm::mat4(1.f); // model-world-view-clip transform matrix ...
-static glm::mat4 s_nrm_mtx = glm::mat4(1.f); // <---- added by student. //combines view and model matrix, transpose, inverse
+static glm::mat4 s_nrm_mtx = glm::mat4(1.f);  //combines view and model matrix, transpose, inverse
 
 static bool drawNormals;
 static bool useVertexNormalColors;
@@ -220,7 +220,6 @@ void CalculateVertexNormals() {
 
 }
 
-//POSSIBLY DONE....
 void DrawObject() {
 
 	// Create pointer for all indices  
@@ -263,7 +262,6 @@ void DrawObject() {
   glBufferData(GL_ARRAY_BUFFER, vtx_nrm_colors.size() * sizeof(glm::vec3), &vtx_nrm_colors[0], GL_STATIC_DRAW);
 
   // create vertex array object
-  //@todo: IMPLEMENT ME
   glGenVertexArrays(1, &s_vao_hdl);
   glBindVertexArray(s_vao_hdl);
 
@@ -297,8 +295,6 @@ void DrawObject() {
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-
-//DON'T DRAW NORMALS YET -- NOT DONE
 void DrawNormals()
 {     
     //uniforms associated with the normals.
@@ -333,16 +329,13 @@ void DrawNormals()
      glVertexAttribPointer(1, 3, GL_FLOAT, false, 0, (void*)0);
      glEnableVertexAttribArray(1);
 
-	// // create vertex array object
-	// //@todo: IMPLEMENT ME
+     // create vertex array object
 	
     // now, unbind triangle's VBO and VAO
-	// //@todo: IMPLEMENT ME
      glBindVertexArray(0);
      glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-//Parser works!!!
 bool ParseOBJ(const std::string& path) {
 
     std::ifstream file;
@@ -424,8 +417,6 @@ bool LoadModel(const std::string& path)
    }
 
    // Calculating Center and unit scale 
-   //@todo: IMPLEMENT ME
-
   glm::vec3 min_points(0.f);
   glm::vec3 max_points(0.f);
 
@@ -468,8 +459,6 @@ bool LoadModel(const std::string& path)
   {
       allVertices[i] =  (allVertices[i] - center) / unitScale;
   }
-
-
    CalculateVertexNormals();
 
    DrawObject();
@@ -559,16 +548,7 @@ void Init() {
   GLsizei fbwidth, fbheight;
   glfwGetFramebufferSize(s_window_handle, &fbwidth, &fbheight);
   glViewport(0, 0, fbwidth, fbheight);
-
-  // compile, link and use shader programs
-  //@todo: IMPLEMENT ME
-
-  //going to to use:
-  // 
-  // get_shader_file_content function and get the content in a character pointer to use for the linking process.
-  //    -- there are two shader files in the source code, those are what we will be operating on.
-  //    -- compile, then link them.
-
+	
   // read and compile shaders
   s_shaderpgm_hdl = glCreateProgram();
 
@@ -620,10 +600,6 @@ void Draw() {
 
   glClearColor(0.2f, 0.2f, .6f, 1.f); // clear drawing surface with this color
   glEnable(GL_DEPTH_TEST);
-  //// cull back-faced or clockwise oriented primitives
-  //glEnable(GL_CULL_FACE);
-  //glFrontFace(GL_CCW);
-  //glCullFace(GL_BACK);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear framebuffer (color and depth)
 
   // write window title with current fps ...
