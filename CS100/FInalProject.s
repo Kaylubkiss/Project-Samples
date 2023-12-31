@@ -86,9 +86,6 @@ pwm_setup
 	
   PUSH { R4-R11, LR } ; stack preserved registers and link register
 
-
-   ;STUDENT CODE STARTS HERE 
-   
    SETBITS SYSCTL_RCC, 2_11000000000000000000
    CLEARBITS SYSCTL_RCC, 2_110000000000000000
    
@@ -101,10 +98,7 @@ pwm_setup
    SETBITS PWM0CTL, 1
    SETBITS PWMENABLE, 2_10
    
-   ;STUDENT CODE ENDS HERE
-   
-
-	; Return back to the calling subroutine.
+; Return back to the calling subroutine.
     POP { R4-R11, LR }
     BX LR	
 
@@ -122,7 +116,6 @@ output_pins_config
 	
   PUSH { R4-R11, LR } ; stack preserved registers and link register
 
-   ;STUDENT CODE STARTS HERE 
    SETBITS RCGCPWM, 1 ;set bit 0 of RCGCPWM
    SETBITS RCGCGPIO, 2_10
    LDR r4, =RCGCGPIO
@@ -134,8 +127,6 @@ output_pins_config
    SETBITS GPIOBDIR, 1<<7
    SETBITS GPIOBAFSEL, 1<<7
    SETBITS GPIOBPCTL, 1<<30
-  
-   ;STUDENT CODE ENDS HERE 
    
     ; Return back to the calling subroutine.
     POP { R4-R11, LR }
@@ -162,11 +153,10 @@ _led_initialization
 _wait_adc
 	PUSH {LR, R4-R11}
 _WAIT
-; STUDENT CODE HERE
 	LDR R4, [R0]
 	TST R4, #1
 	BEQ _WAIT
-; END STUDENT CODE
+ 
 	POP {LR, R4-R11}
 	BX LR
 
@@ -238,12 +228,12 @@ _TRANSLATE_AND_BRANCH
 ; Outputs: Masked result of ADC in R0
 _read_adc
 	PUSH {LR, R4-R11}
-; STUDENT CODE HERE
+ 
 	LDR R4, [R0]
 	LDR R5, =0xFFF
 	AND R4, R5
 	MOV R0, R4
-; END STUDENT CODE
+
 	POP {LR, R4-R11}
 	BX LR
 
@@ -564,7 +554,6 @@ _TURN_OFF_DOWN_LED
 	CLEARBITS GPIOBDATA_RW, LED_DOWN
 	POP { R4-R11, LR }
 	BX LR
-; END STUDENT CODE
 	
 
 	END
