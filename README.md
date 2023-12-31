@@ -1,1 +1,1 @@
-Lots of cool projects, lots of sweat and tears to understand core concepts.
+Lots of cool projects, lots of sweat and tears to understand core concepts. Note that the files inside of these folders are not the scope of the entire classes they are from, I've only included some of the projects I think are relevant/cool.
