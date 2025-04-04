@@ -1,4 +1,4 @@
-# My Personal Custom Engine!
+# Custom Engine!
 
 I started this project for a few reasons:
 - My persistent interest in programming graphics
