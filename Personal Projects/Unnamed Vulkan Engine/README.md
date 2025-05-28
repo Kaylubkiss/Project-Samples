@@ -1,10 +1,10 @@
 # Custom Engine!
 
 <p>
-  <video>
+  <video controls loop>
     <source src="Images/Freddy_Fazbear.mp4" type="video/mp4">
     Your browser seems to not support mp4...
-   </video>
+  </video>
 </p>
 
 I started this project for a few reasons:
