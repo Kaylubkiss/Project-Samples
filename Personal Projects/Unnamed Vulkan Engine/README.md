@@ -1,7 +1,10 @@
 # Custom Engine!
 
 <p>
-  <img src="Images/Freddy_Fazbear.gif"></img>
+  <video>
+    <source src="Images/Freddy_Fazbear.mp4" type="video/mp4">
+    Your browser seems to not support mp4...
+   </video>
 </p>
 
 I started this project for a few reasons:
