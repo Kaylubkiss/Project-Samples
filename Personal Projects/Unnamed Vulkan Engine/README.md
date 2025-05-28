@@ -1,11 +1,6 @@
 # Custom Engine!
 
-<p>
-  <video controls loop>
-    <source src="Images/Freddy_Fazbear.mp4" type="video/mp4">
-    Your browser seems to not support mp4...
-  </video>
-</p>
+https://github.com/user-attachments/assets/327ccbb3-73f9-469b-b4a5-79ade3b32908
 
 I started this project for a few reasons:
 - My persistent interest in programming graphics
